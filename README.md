@@ -116,14 +116,3 @@ plt.show()
 Authors
 
 • Subham Gogoi - https://github.com/gogoisubham
-
-License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-### Creating the requirements.txt File
-
-If you haven’t already, you can generate a `requirements.txt` file to list all the dependencies for your project:
-
-```bash
-pip freeze > requirements.txt
