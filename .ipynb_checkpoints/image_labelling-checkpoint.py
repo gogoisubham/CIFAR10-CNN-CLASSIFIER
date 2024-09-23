@@ -22,7 +22,7 @@ def auto_label_images(parent_dir):
     for class_name in class_names:
         sub_dir = os.path.join(parent_dir, class_name)
         if os.path.exists(sub_dir):
-            for filename in os.listdir(sub_dir):
+            for filename in sorted(os.listdir(sub_dir)):
                 if filename.endswith(('.jpg', '.jpeg', '.png')):
                     file_path = os.path.join(sub_dir, filename)
                     true_labels.append(class_labels[class_name])

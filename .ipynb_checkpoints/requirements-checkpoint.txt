@@ -1,6 +1,0 @@
-h5py 
-matplotlib 
-numpy 
-scikit-learn 
-tensorflow-macos==2.13.0
-

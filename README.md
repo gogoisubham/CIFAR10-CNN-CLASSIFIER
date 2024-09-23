@@ -1,23 +1,21 @@
-# CIFAR-10 CNN Classifier
+# CIFAR-10 CNN Image Classifier
 
-This project implements Convolutional Neural Networks (CNNs) for image classification using the CIFAR-10 dataset. It demonstrates both binary classification and multiclass classification using TensorFlow and Keras. The project is designed to help you understand how to build, train, evaluate, and save a CNN model.
+This project implements Convolutional Neural Networks (CNNs) for image classification using the CIFAR-10 dataset. It demonstrates both binary and multiclass classification using TensorFlow and Keras. The project is organized with separate subfolders for binary and multiclass models and includes Python scripts for image preprocessing and labeling.
 
 ## Project Structure
 ```plaintext
 CIFAR10-CNN-Classifier/
-├── README.md
-├── data/
-│   └── download_data.py  # If you want to include data download scripts
-├── notebooks/
-│   └── cnn_classification.ipynb  # Jupyter notebook with all code
-├── src/
-│   ├── model_sequential.py  # Code for the Sequential model
-│   ├── model_functional.py  # Code for the Functional model
-│   └── train.py  # Training scripts
-├── models/
-│   └── cifar10_model.h5  # Saved model
-└── results/
-└── training_history.png  # Plots of training history
+├── README.md                       # Project documentation
+├── image_labelling.py              # Script for auto-labeling images based on directory structure
+├── image_preprocessing.py          # Script for preprocessing images for model prediction
+├── MobileNetV2/                    # Folder containing notebooks and models for multiclass classification
+│   ├── multiclassModel.ipynb       # Jupyter notebook for training the multiclass model
+│   ├── multiclassModelPredict.ipynb # Jupyter notebook for predicting with the multiclass model
+│   └── mobileNetV2.h5              # Trained MobileNetV2 model for multiclass classification
+└── Sequential/                     # Folder containing notebooks and models for binary classification
+    ├── binaryModel.ipynb            # Jupyter notebook for training the binary model
+    ├── binaryModelPredict.ipynb     # Jupyter notebook for predicting with the binary model
+    └── binary-model.h5              # Trained Sequential model for binary classification
 ```
 
 ## Getting Started
@@ -29,74 +27,60 @@ CIFAR10-CNN-Classifier/
 - NumPy
 - Matplotlib
 - scikit-learn
+- PIL (Python Imaging Library)
 
 ### Installing
 
-1. Clone the repository:
+Clone the repository:
+
     ```bash
     git clone https://github.com/yourusername/CIFAR10-CNN-Classifier.git
     cd CIFAR10-CNN-Classifier
     ```
 
-2. Install the required packages:
-    ```bash
-    pip install -r requirements.txt
-    ```
-
 ### Running the Code
 
-#### Training the Model
+#### Binary Classification
 
-You can run the Jupyter notebook or the Python scripts to train the model.
+1. **Training the Binary Model**:
+   - Open `binaryModel.ipynb` in the `Sequential/` folder and run all cells to train, evaluate and save the binary classification model.
 
-1. **Jupyter Notebook**:
-    Open `cnn_classification.ipynb` in JupyterLab or Jupyter Notebook and run the cells sequentially to train and evaluate the model.
+2. **Predicting with the Binary Model**:
+   - Open `binaryModelPredict.ipynb` in the `Sequential/` folder and run the appropriate cells to predict on your downloaded test images using the trained binary model.
 
-2. **Python Scripts**:
-    Run the following command to train the model using the provided script:
-    ```bash
-    python src/train.py
-    ```
+#### Multiclass Classification
 
-#### Evaluating the Model
+1. **Training the Multiclass Model**:
+   - Open `multiclassModel.ipynb` in the `MobileNetV2/` folder and run all cells to train, evaluate and save the multiclass classification model.
 
-The evaluation is done as part of the training process. The model's accuracy and loss on the validation set will be printed and plotted.
-
-### Predicting on New Data
-
-To use the trained model to predict on new, unseen data, you can use the following code snippet:
-
-```python
-from tensorflow.keras.models import load_model
-import numpy as np
-
-# Load the trained model
-model = load_model('models/cifar10_model.h5')
-
-# Assuming new_data is your new data array
-predictions = model.predict(new_data)
-predicted_classes = np.argmax(predictions, axis=1)
-
-print(predicted_classes)
-```
+2. **Predicting with the Multiclass Model**:
+   - Open `multiclassModelPredict.ipynb` in the `MobileNetV2/` folder and run the appropriate cells to predict on your downloaded test images using the trained multiclass model.
 
 ### Project Description
 
 #### Binary Classification
 
-+ Dataset: CIFAR-10
-+ Classes: Airplane vs. Not Airplane
-+ Model: Convolutional Neural Network (CNN) built using the Sequential API
-+ Loss Function: Binary Cross-Entropy
-+ Optimizer: Adam
+- **Dataset**: CIFAR-10
+- **Classes**: Airplane vs. Not Airplane
+- **Model**: Convolutional Neural Network (CNN) built using the Sequential API
+- **Loss Function**: Binary Cross-Entropy
+- **Optimizer**: Adam
 
 #### Multiclass Classification
 
-+ Dataset: CIFAR-10
-+ Classes: 10 classes (Airplane, Automobile, Bird, Cat, Deer, Dog, Frog, Horse, Ship, Truck)
-+ Model: Convolutional Neural Network (CNN) built using the Functional API
-+ Loss Function: Categorical Cross-Entropy
-+ Optimizer: Adam
+- **Dataset**: CIFAR-10
+- **Classes**: 10 classes (Airplane, Car, Bird, Cat, Deer, Dog, Frog, Horse, Ship, Truck)
+- **Model**: Convolutional Neural Network (CNN) built using the Functional API with MobileNetV2 as the base model
+- **Loss Function**: Categorical Cross-Entropy
+- **Optimizer**: Adam
+
+### Image Preprocessing
+
+Use the `image_preprocessing.py` script to preprocess images for prediction. The script provides functions to resize and normalize images before feeding them to the loaded model.
+
+### Auto-Labeling
+
+Use the `image_labelling.py` script to automatically label images based on their directory structure. The script traverses subfolders named after each class and assigns labels accordingly.
 
 ### Visualizing Data
 
@@ -105,7 +89,7 @@ The project includes code to visualize the CIFAR-10 images along with their clas
 ```python
 import matplotlib.pyplot as plt
 
-class_names = ['airplane', 'automobile', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
+class_names = ['Airplane', 'Car', 'Bird', 'Cat', 'Deer', 'Dog', 'Frog', 'Horse', 'Ship', 'Truck']
 
 plt.figure(figsize=(10, 10))
 for i in range(25):
@@ -120,6 +104,6 @@ plt.show()
 
 ### Author
 
-- **Subham Gogoi** - https://github.com/gogoisubham
+- **Subham Gogoi** - [GitHub](https://github.com/gogoisubham)
 
-For any questions or suggestions, please reach out to subhgogoi@gmail.com
+For any questions or suggestions, please reach out to subhgogoi@gmail.com.
